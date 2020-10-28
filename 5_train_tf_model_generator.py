@@ -7,6 +7,8 @@ import tensorflow_hub as hub
 from tensorflow.keras.callbacks import EarlyStopping
 from sklearn.utils import class_weight
 
+import config
+
 
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 
@@ -20,13 +22,9 @@ if len(tf.config.list_physical_devices('GPU')) >= 1:
 else:
     print("GPU not available")
 
-# model_url, pixels = ("https://tfhub.dev/google/imagenet/inception_v3/feature_vector/4", 299)
-# model_url, pixels = ("https://tfhub.dev/google/imagenet/mobilenet_v2_100_224/feature_vector/4", 224)
-model_url, pixels = (
-    "https://tfhub.dev/tensorflow/efficientnet/lite4/feature-vector/2", 380)
 
-IMAGE_SIZE = (pixels, pixels)
-print("Using {} with input size {}".format(model_url, IMAGE_SIZE))
+IMAGE_SIZE = (config.MODEL_INPUT_SIZE, config.MODEL_INPUT_SIZE)
+print("Using {} with input size {}".format(config.MODEL_URL, IMAGE_SIZE))
 
 # load training data
 BATCH_SIZE = 32
@@ -57,10 +55,10 @@ train_generator = train_datagen.flow_from_directory(
 do_fine_tuning = False
 
 # build model
-print("Building model with", model_url)
+print("Building model with", config.MODEL_URL)
 model = tf.keras.Sequential([
     tf.keras.layers.InputLayer(input_shape=IMAGE_SIZE + (3,)),
-    hub.KerasLayer(model_url, trainable=do_fine_tuning),
+    hub.KerasLayer(config.MODEL_URL, trainable=do_fine_tuning),
     tf.keras.layers.Dropout(rate=0.2),
     tf.keras.layers.Dense(train_generator.num_classes,
                           kernel_regularizer=tf.keras.regularizers.l2(0.0001))

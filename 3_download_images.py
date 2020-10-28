@@ -5,29 +5,34 @@ import io
 import warnings
 import requests
 import concurrent.futures
+import config
 
+""" ignore annoying exif warnings.
+    I do not recommend removing exif data
+    since it may contain image orientation and copyright information
+"""
 warnings.filterwarnings("ignore", "(Possibly )?corrupt EXIF data", UserWarning)
 
-id_files = Path('.').glob('./in/ids/*.csv')
-target_root_folder = Path('/Volumes/LS_BACKUP2/open_images')
-image_count_per_class = 10000
-high_resolution = True
 
+print('reading class ids and names')
+
+id_files = config.DIRPATH_IDS.glob('*.csv')
 class_name_to_id = {}
 class_id_to_name = {}
-with open('in/class_id_to_name.csv') as f:
+with open(config.FILEPATH_CLASS_NAMES) as f:
     next(f)
-    for line in f:
-        line_arr = line.rstrip().split(',')
-        class_id = line_arr[0]
-        class_name = line_arr[1].lower()
+    reader = csv.reader(f, delimiter=',')
+    for row in reader:
+        class_id = row[0]
+        class_name = row[1].lower()
         class_name_to_id[class_name] = class_id
         class_id_to_name[class_id] = class_name
-print("read in/class_id_to_name.csv")
 
+
+print("reading bounding boxes")
 
 box_for_image = {}
-boxes_files = Path('.').glob('./in/boxes/*.csv')
+boxes_files = config.DIRPATH_BOUNDING_BOXES.glob('*.csv')
 for filename in boxes_files:
     with open(filename) as f:
         next(f)
@@ -47,11 +52,13 @@ for filename in boxes_files:
             box = (x_min, y_min, x_max, y_max)
             box_for_image[class_name][image_id] = box
 
-print("read bounding boxes")
 
 
+print("reading image urls")
+
+# set url index depending on resolution
 image_url_index = 10
-if high_resolution:
+if config.DOWNLAD_IMAGES_HIGH_RESOLUTION:
     image_url_index = 2
 
 image_id_to_url = {}
@@ -63,18 +70,16 @@ for filename in id_files:
             image_id = row[0]
             image_url = row[image_url_index]
             image_id_to_url[image_id] = image_url
-print("read id_files")
 
+print("reading class id to image ids mapping")
 
 class_id_to_image_ids = {}
-with open('processing/class_id_to_image_ids.csv') as f:
+with open(config.FILEPATH_CLASS_ID_TO_IMAGE_IDS) as f:
     for line in f:
         line_arr = line.rstrip().split(',')
         class_id = line_arr[0]
         image_ids = line_arr[1].split(';')
         class_id_to_image_ids[class_id] = image_ids
-
-print("read class_id_to_image_ids")
 
 
 threaded_executor = concurrent.futures.ThreadPoolExecutor()
@@ -85,6 +90,7 @@ def download_url_to_file(url, filename, box):
         response = requests.get(url, allow_redirects=True, timeout=10)
         if (response.status_code == 200):
             if box:
+                # crop image to bounding box
                 img = Image.open(io.BytesIO(response.content))
                 width, height = img.size
                 box = (box[0] * width, box[1] * height,
@@ -127,10 +133,10 @@ def download_images_for_class_name(class_name, class_path, image_ids):
                             return_when=concurrent.futures.ALL_COMPLETED)
 
 
-def download_images_for_category_file(filename):
+def download_images_for_class_list(filename):
     category_name = filename.stem
     print('--- ' + category_name)
-    category_path = target_root_folder / category_name
+    category_path = config.DIRPATH_IMAGE_DOWNLOAD / category_name
     if not category_path.exists():
         category_path.mkdir()
 
@@ -146,12 +152,16 @@ def download_images_for_category_file(filename):
 
         print(f'class {i+1}/{len(lines)} ({class_name})')
 
-        image_ids = class_id_to_image_ids[class_id][0:image_count_per_class]
+        image_ids = class_id_to_image_ids[class_id][0:config.MAXIMUM_DOWNLOADED_IMAGE_COUNT_PER_CLASS]
 
         download_images_for_class_name(class_name, class_path, image_ids)
 
 
-category_files = Path('.').glob('./categories/*.csv')
+# download images for all class lists
 
-for filename in category_files:
-    download_images_for_category_file(filename)
+lists_to_train = config.DIRPATH_CLASS_LISTS_TO_TRAIN.glob('*.csv')
+
+for filename in lists_to_train:
+    download_images_for_class_list(filename)
+
+print("-------------- DONE --------------")

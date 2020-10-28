@@ -1,10 +1,11 @@
 import csv
 import config
+from pathlib import Path
 
-# create class_id_to_name
+print('reading class ids')
 
 class_ids = []
-with open(config.FILEPATH_CLASS_ID_TO_NAME) as f:
+with open(config.FILEPATH_CLASS_NAMES) as f:
     next(f)
     reader = csv.reader(f, delimiter=',')
     for row in reader:
@@ -12,7 +13,7 @@ with open(config.FILEPATH_CLASS_ID_TO_NAME) as f:
         class_ids.append(class_id)
 
 
-# match each image id to a list of class ids
+print('matching class ids to image ids')
 
 class_id_to_image_ids = {}
 for class_id in class_ids:
@@ -27,15 +28,17 @@ for filename in label_files:
             image_id = row[0]
             class_id = row[2]
             confidence = float(row[3])
-            if confidence >= config.MINIMUM_CONFIDENCE_FOR_LABEL:
-                if class_id in class_ids:
-                    class_id_to_image_ids[class_id].append(image_id)
+            if  confidence >= config.MINIMUM_CONFIDENCE_FOR_LABEL \
+            and class_id in class_ids:
+                class_id_to_image_ids[class_id].append(image_id)
 
-f = open('processing/class_id_to_image_ids.csv', "w")
+print('writing result to file')
 
+f = open(config.FILEPATH_CLASS_ID_TO_IMAGE_IDS, "w")
 for class_id in class_ids:
     image_ids = class_id_to_image_ids[class_id]
     image_ids_str = ';'.join(image_ids)
     f.write(f'{class_id},{image_ids_str}\n')
-
 f.close()
+
+print("-------------- DONE --------------")

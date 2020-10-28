@@ -1,9 +1,12 @@
 import functools
 import csv
+import config
+
+print('reading class ids')
 
 class_ids = []
 class_id_to_name = {}
-with open('in/class_id_to_name.csv') as f:
+with open(config.FILEPATH_CLASS_NAMES) as f:
     next(f)
     reader = csv.reader(f, delimiter=',')
     for row in reader:
@@ -12,8 +15,10 @@ with open('in/class_id_to_name.csv') as f:
         class_ids.append(class_id)
         class_id_to_name[class_id] = class_name
 
+print('reading class id to image ids mapping')
+
 class_id_to_image_ids = {}
-with open('processing/class_id_to_image_ids.csv') as f:
+with open(config.FILEPATH_CLASS_ID_TO_IMAGE_IDS) as f:
     for line in f:
         line_arr = line.rstrip().split(',')
         class_id = line_arr[0]
@@ -21,7 +26,7 @@ with open('processing/class_id_to_image_ids.csv') as f:
         class_id_to_image_ids[class_id] = image_ids
 
 
-# sort trainable_class_ids by training data size
+print('sorting classes by count')
 
 def compare(x1, x2):
     return len(class_id_to_image_ids[x2]) - len(class_id_to_image_ids[x1])
@@ -30,8 +35,9 @@ def compare(x1, x2):
 class_ids = sorted(
     class_ids, key=functools.cmp_to_key(compare))
 
+print('writing result to file')
 
-f = open('processing/class_list_by_image_count.csv', "w")
+f = open(config.FILEPATH_CLASS_LIST_BY_IMAGE_COUNT, "w")
 
 for class_id in class_ids:
     class_name = class_id_to_name[class_id]
@@ -39,5 +45,6 @@ for class_id in class_ids:
         class_name = f'"{class_name}"'
     count = len(class_id_to_image_ids[class_id])
     f.write(f'{class_name}, {count}\n')
-
 f.close()
+
+print("-------------- DONE --------------")
