@@ -47,4 +47,4 @@ for class_id in class_ids:
     f.write(f'{class_name}, {count}\n')
 f.close()
 
-print("-------------- DONE --------------")
+print('-------------- DONE --------------')

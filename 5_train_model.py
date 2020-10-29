@@ -12,16 +12,17 @@ import config
 
 
 # enable to prevent PIL warning
+
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 # debug information
 
-print("TF version:", tf.__version__)
-print("Hub version:", hub.__version__)
+print('TF version:', tf.__version__)
+print('Hub version:', hub.__version__)
 if len(tf.config.list_physical_devices('GPU')) >= 1:
-    print("GPU is available")
+    print('GPU is available')
 else:
-    print("GPU not available")
+    print('GPU not available')
 
 # load dataset
 
@@ -57,7 +58,7 @@ val_ds = val_ds.prefetch(buffer_size=AUTOTUNE)
 
 # build model
 
-print("Building model with", config.MODEL_URL)
+print('Building model with', config.MODEL_URL)
 model_layers = [
     tf.keras.layers.InputLayer(input_shape=IMAGE_SIZE + (3,)),
     hub.KerasLayer(config.MODEL_URL, trainable=config.DO_FINE_TUNING),
@@ -143,6 +144,8 @@ hist = model.fit(
     callbacks=callbacks
 ).history
 
-model.save("out/saved_model")
+# save model 
 
-print("-------------- DONE --------------")
+model.save(config.FILEPATH_SAVED_MODEL)
+
+print('-------------- DONE --------------')

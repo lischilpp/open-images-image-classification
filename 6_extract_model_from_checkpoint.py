@@ -10,21 +10,20 @@ from sklearn.utils import class_weight
 
 import config
 
+# init variables
+
 IMAGE_SIZE = (config.MODEL_INPUT_SIZE, config.MODEL_INPUT_SIZE)
 print(f'Using {config.MODEL_URL} with input size {IMAGE_SIZE}')
 
-val_ds = tf.keras.preprocessing.image_dataset_from_directory(
-    config.DIRPATH_DATASET,
-    validation_split=0.2,
-    subset="validation",
-    seed=123,
-    image_size=IMAGE_SIZE,
-    batch_size=config.DATASET_BATCH_SIZE)
-
-class_names = val_ds.class_names
+class_names = list(config.DIRPATH_DATASET.glob('*/'))
 class_count = len(class_names)
 
+print(class_names)
+
+# build model
+
 print("Building model with", config.MODEL_URL)
+
 model = tf.keras.Sequential([
     tf.keras.layers.InputLayer(input_shape=IMAGE_SIZE + (3,)),
     hub.KerasLayer(config.MODEL_URL, trainable=config.DO_FINE_TUNING),
@@ -41,6 +40,8 @@ model.compile(optimizer='adam',
                   from_logits=True),
               metrics=['accuracy'])
 
+# load weights from checkpoint
+
 checkpoint_dir = Path('./checkpoint')
 checkpoint_path = checkpoint_dir / 'cp.ckpt'
 
@@ -50,4 +51,8 @@ if checkpoint_dir.exists():
 else:
     exit('checkpoint does not exist!')
 
-model.save("out/saved_model")
+# save model
+
+model.save(config.FILEPATH_SAVED_MODEL)
+
+print('-------------- DONE --------------')

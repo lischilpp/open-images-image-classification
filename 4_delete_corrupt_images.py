@@ -5,7 +5,7 @@ import warnings
 import config
 
 # ignore verbose warnings from PIL
-warnings.filterwarnings("ignore")
+warnings.filterwarnings('ignore')
 
 
 ImageFile.LOAD_TRUNCATED_IMAGES = True
@@ -42,4 +42,4 @@ for img in images:
 
     i += 1
 
-print("-------------- DONE --------------")
+print('-------------- DONE --------------')

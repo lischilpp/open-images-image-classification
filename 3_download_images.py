@@ -8,7 +8,7 @@ import concurrent.futures
 import config
 
 # ignore verbose warnings from PIL
-warnings.filterwarnings("ignore")
+warnings.filterwarnings('ignore')
 
 
 print('reading class ids and names')
@@ -26,7 +26,7 @@ with open(config.FILEPATH_CLASS_NAMES) as f:
         class_id_to_name[class_id] = class_name
 
 
-print("reading bounding boxes")
+print('reading bounding boxes')
 
 box_for_image = {}
 boxes_files = config.DIRPATH_BOUNDING_BOXES.glob('*.csv')
@@ -51,7 +51,7 @@ for filename in boxes_files:
 
 
 
-print("reading image urls")
+print('reading image urls')
 
 # set url index depending on resolution
 image_url_index = 10
@@ -68,7 +68,7 @@ for filename in id_files:
             image_url = row[image_url_index]
             image_id_to_url[image_id] = image_url
 
-print("reading class id to image ids mapping")
+print('reading class id to image ids mapping')
 
 class_id_to_image_ids = {}
 with open(config.FILEPATH_CLASS_ID_TO_IMAGE_IDS) as f:
@@ -160,4 +160,4 @@ lists_to_train = config.DIRPATH_CLASS_LISTS_TO_TRAIN.glob('*.txt')
 for filename in lists_to_train:
     download_images_for_class_list(filename)
 
-print("-------------- DONE --------------")
+print('-------------- DONE --------------')

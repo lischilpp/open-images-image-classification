@@ -41,4 +41,4 @@ for class_id in class_ids:
     f.write(f'{class_id},{image_ids_str}\n')
 f.close()
 
-print("-------------- DONE --------------")
+print('-------------- DONE --------------')
