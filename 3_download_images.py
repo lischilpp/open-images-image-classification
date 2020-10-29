@@ -155,7 +155,7 @@ def download_images_for_class_list(filename):
 
 # download images for all class lists
 
-lists_to_train = config.DIRPATH_CLASS_LISTS_TO_TRAIN.glob('*.txt')
+lists_to_train = config.DIRPATH_CLASS_LISTS_TO_DOWNLOAD.glob('*.txt')
 
 for filename in lists_to_train:
     download_images_for_class_list(filename)
