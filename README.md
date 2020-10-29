@@ -11,7 +11,7 @@
  - evaluate the performance of the model (includes per-class accuracies)
  
  # Dependencies
--	Python 3.6 or higher
+ - Python 3.6 or higher
  - Pillow~7.0.0
  - numpy~1.18.5
  - tensorflow~2.3.1
@@ -55,3 +55,4 @@ run **6_extract_model_from_checkpoint.py**
 # Recommendations
  - The dataset is very noisy, you might have to manually delete images that do not fit the label
  - Make sure you have enabled GPU support https://www.tensorflow.org/install/gpu
+ - Place your dataset on a SSD drive (500Mb/s should be enough) for faster training
