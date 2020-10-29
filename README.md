@@ -32,7 +32,7 @@ other package versions may work too
 5. Run the script **2_create_class_list_by_image_count.py**  
 	*Output:*  
 	![script2.png](screenshots/script2.png)
-6. Choose class names to train your classifier on from **out/class_list_by_image_count** and put them into a **.csv** file inside **in/class_lists**  
+6. Choose class names to train your classifier on from **out/class_list_by_image_count** and put them into a **.txt** file inside **in/class_lists**  
 *Example*:  
 ![script1.png](screenshots/class_list.png)
 7. Adjust all options in **config.py** under **# image download** to your liking
