@@ -43,10 +43,11 @@ other package versions may work too
 10. Adjust all options in **config.py** under **# model training** to your liking
 11. Run the script **5_train_model.py**  
 	*Output:*  
-	![script5.png](screenshots/script5.png)
+	![script5.png](screenshots/script5.png)  
+	Now you have an Tensorflow Image classifier at **out/saved_model**
 12. If you killed the previous script because it took too long,
-you can extract your model from checkpoint using **6_extract_model_from_checkpoint.py**
+run **6_extract_model_from_checkpoint.py**
 13. Run the script **7_evaluate_model.py**  
 	*Output:*  
 	![script7.png](screenshots/script7.png)
-14. DONE - now you have an Tensorflow Image classifier at **out/saved_model**
+14. DONE
