@@ -37,7 +37,7 @@ other package versions may work too
 ![script1.png](screenshots/class_list.png)
 7. Adjust all options in **config.py** under **# image download** to your liking
 8. Run the script **3_download_images.py**  
-	*Output:*  
+	*Example Output:*  
 	![script3.png](screenshots/script3.png)
 9. Run the script **4_delete_corrupt_images.py**
 10. Adjust all options in **config.py** under **# model training** to your liking
