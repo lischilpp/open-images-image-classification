@@ -11,14 +11,17 @@
  - evaluate the performance of the model (includes per-class accuracies)
  
  # Dependencies
- - Python 3.6 or higher
- - Pillow~7.0.0
- - numpy~1.18.5
- - tensorflow~2.3.1
- - tensorflow-hub~0.9.0
- - scikit-learn~0.23.2
+ Python 3.6 or higher
+ 
+ | Package | Version
+| -------- | ----------- |
+`Pillow` | `7.0.0` |
+`numpy` | `1.18.5` |
+`tensorflow` | `2.3.1` |
+`tensorflow-hub` | `0.9.0` |
+`scikit-learn` | `0.23.2` |
 
-other package versions may work too
+Other package versions may work too
 
  # Workflow
  1. Download the **Image IDs**, **Image labels**, **Boxes** and **Class Names** from https://storage.googleapis.com/openimages/web/download.html  
