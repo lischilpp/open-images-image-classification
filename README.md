@@ -44,7 +44,7 @@ other package versions may work too
 11. Run the script **5_train_model.py**  
 	*Output:*  
 	![script5.png](screenshots/script5.png)
-12. If you killed the previous script because it took to long,
+12. If you killed the previous script because it took too long,
 you can extract your model from checkpoint using **6_extract_model_from_checkpoint.py**
 13. Run the script **7_evaluate_model.py**  
 	*Output:*  
