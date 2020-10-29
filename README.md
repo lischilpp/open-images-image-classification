@@ -51,3 +51,7 @@ run **6_extract_model_from_checkpoint.py**
 	*Output:*  
 	![script7.png](screenshots/script7.png)
 14. DONE
+
+# Recommendations
+ - The dataset is very noisy, you might have to manually delete images that do not fit the label
+ - Make sure you have enabled GPU support https://www.tensorflow.org/install/gpu
