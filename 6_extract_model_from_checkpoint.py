@@ -8,33 +8,26 @@ from tensorflow.keras import layers
 from tensorflow.keras.models import Sequential
 from sklearn.utils import class_weight
 
-img_dir = Path('/media/linus/ML/open_images/animals/training')
+import config
 
-model_url, pixels = (
-    "https://tfhub.dev/tensorflow/efficientnet/lite4/feature-vector/2", 380)
-
-IMAGE_SIZE = (pixels, pixels)
-print("Using {} with input size {}".format(model_url, IMAGE_SIZE))
-
-BATCH_SIZE = 32
-
+IMAGE_SIZE = (config.MODEL_INPUT_SIZE, config.MODEL_INPUT_SIZE)
+print(f'Using {config.MODEL_URL} with input size {IMAGE_SIZE}')
 
 val_ds = tf.keras.preprocessing.image_dataset_from_directory(
-    img_dir,
+    config.DIRPATH_DATASET,
     validation_split=0.2,
     subset="validation",
     seed=123,
     image_size=IMAGE_SIZE,
-    batch_size=BATCH_SIZE)
+    batch_size=config.DATASET_BATCH_SIZE)
 
 class_names = val_ds.class_names
 class_count = len(class_names)
 
-do_fine_tuning = False
-print("Building model with", model_url)
+print("Building model with", config.MODEL_URL)
 model = tf.keras.Sequential([
     tf.keras.layers.InputLayer(input_shape=IMAGE_SIZE + (3,)),
-    hub.KerasLayer(model_url, trainable=do_fine_tuning),
+    hub.KerasLayer(config.MODEL_URL, trainable=config.DO_FINE_TUNING),
     tf.keras.layers.Dropout(rate=0.2),
     tf.keras.layers.Dense(class_count,
                           kernel_regularizer=tf.keras.regularizers.l2(0.0001))

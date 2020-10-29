@@ -2,9 +2,9 @@ from pathlib import Path
 from math import *
 import functools
 import numpy as np
-
 import tensorflow as tf
 from tensorflow import keras
+import config
 
 def format_percentage2(n):
     return floor(n * 10000) / 100

@@ -1,7 +1,12 @@
 from pathlib import Path
 from PIL import Image, ImageFile
 import math
+import warnings
 import config
+
+# ignore verbose warnings from PIL
+warnings.filterwarnings("ignore")
+
 
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 
@@ -14,12 +19,13 @@ def check_image(fn):
         return False
     return True
 
-
+print('counting images')
 images_count = 0
 images = config.DIRPATH_IMAGE_DOWNLOAD.rglob('*.jpg')
 for img in images:
     images_count += 1
 
+print('checking for corrupt images')
 i = 0
 last_percentage = 0
 images = config.DIRPATH_IMAGE_DOWNLOAD.rglob('*.jpg')

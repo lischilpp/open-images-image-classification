@@ -1,14 +1,29 @@
 from pathlib import Path
 
+# options
+
+MODEL_URL, MODEL_INPUT_SIZE = ("https://tfhub.dev/tensorflow/efficientnet/lite4/feature-vector/2", 380)
+# MODEL_URL, MODEL_INPUT_SIZE = ("https://tfhub.dev/google/imagenet/mobilenet_v2_100_224/feature_vector/4", 224)
+# MODEL_URL, MODEL_INPUT_SIZE = ("https://tfhub.dev/google/imagenet/inception_v3/feature_vector/4", 299)
+
 MINIMUM_CONFIDENCE_FOR_LABEL = 0.9
 MAXIMUM_DOWNLOADED_IMAGE_COUNT_PER_CLASS = 100
 DOWNLAD_IMAGES_HIGH_RESOLUTION = True
+TEST_DATA_PERCENTAGE = 0.2
+VALIDATION_DATA_PERCENTAGE = 0.2
+DO_DATA_AUGMENTATION = True
+DO_FINE_TUNING = False
+DATASET_BATCH_SIZE = 32
+DROPOUT_RATE = 0.2
+TRAINING_EPOCHS = 32
+ENABLE_CHECKPOINTS = True
+ENABLE_EARLY_STOPPING = True
+ENABLE_AUTOMATIC_CLASS_WEIGHTS = True
 
-# MODEL_URL, MODEL_INPUT_SIZE = ("https://tfhub.dev/google/imagenet/mobilenet_v2_100_224/feature_vector/4", 224)
-# MODEL_URL, MODEL_INPUT_SIZE = ("https://tfhub.dev/google/imagenet/inception_v3/feature_vector/4", 299)
-MODEL_URL, MODEL_INPUT_SIZE = ("https://tfhub.dev/tensorflow/efficientnet/lite4/feature-vector/2", 380)
+# paths
 
 DIRPATH_IMAGE_DOWNLOAD = Path('/media/linus/ML/open_images')
+DIRPATH_DATASET = DIRPATH_IMAGE_DOWNLOAD / 'animals'
 DIRPATH_IDS = Path('in/ids')
 DIRPATH_LABELS = Path('in/labels')
 DIRPATH_BOUNDING_BOXES = Path('in/boxes')

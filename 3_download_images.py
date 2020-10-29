@@ -7,11 +7,8 @@ import requests
 import concurrent.futures
 import config
 
-""" ignore annoying exif warnings.
-    I do not recommend removing exif data
-    since it may contain image orientation and copyright information
-"""
-warnings.filterwarnings("ignore", "(Possibly )?corrupt EXIF data", UserWarning)
+# ignore verbose warnings from PIL
+warnings.filterwarnings("ignore")
 
 
 print('reading class ids and names')
@@ -145,8 +142,7 @@ def download_images_for_class_list(filename):
         lines = [line.rstrip() for line in f]
 
     for i in range(len(lines)):
-        line = lines[i]
-        class_name = line.split(',')[0]
+        class_name = lines[i]
         class_id = class_name_to_id[class_name]
         class_path = category_path / class_name
 
@@ -159,7 +155,7 @@ def download_images_for_class_list(filename):
 
 # download images for all class lists
 
-lists_to_train = config.DIRPATH_CLASS_LISTS_TO_TRAIN.glob('*.csv')
+lists_to_train = config.DIRPATH_CLASS_LISTS_TO_TRAIN.glob('*.txt')
 
 for filename in lists_to_train:
     download_images_for_class_list(filename)
