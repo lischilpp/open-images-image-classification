@@ -15,10 +15,9 @@ import config
 IMAGE_SIZE = (config.MODEL_INPUT_SIZE, config.MODEL_INPUT_SIZE)
 print(f'Using {config.MODEL_URL} with input size {IMAGE_SIZE}')
 
-class_names = list(config.DIRPATH_DATASET.glob('*/'))
-class_count = len(class_names)
+class_paths = list(config.DIRPATH_DATASET.glob('*/'))
+class_count = len(class_paths)
 
-print(class_names)
 
 # build model
 
