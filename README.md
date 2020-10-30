@@ -27,7 +27,7 @@ Can also be installed from requirements.txt
 
  # Workflow
 1. Download the **Image IDs**, **Image labels**, **Boxes** and **Class Names** from https://storage.googleapis.com/openimages/web/download.html  
- (Train, Validation and Test of "Subset with Image-Level Labels" and Bounding Boxes of **Subset with Bounding Boxes**)
+ (Train, Validation and Test of "Subset with Image-Level Labels" and Bounding Boxes of "Subset with Bounding Boxes")
  
 2. Put them in a folder structure like this:  
 	![inputFolder.png](screenshots/input_folder.png)
