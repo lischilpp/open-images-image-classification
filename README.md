@@ -1,6 +1,5 @@
 # OID-ImageClassification
-
-### A voxel engine written in C# using Unity3D
+### A collection of scripts to download data, train and evaluate an image classifier on Open Images using TensorFlow
 
 # Features
 
