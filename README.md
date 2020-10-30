@@ -22,7 +22,7 @@
 `tensorflow-hub` | `0.9.0` |
 `sclearn` | `0.23.2` |
                 
-Other package versions may work too.
+Other package versions may work too.  
 Can also be installed from requirements.txt
 
  # Workflow
