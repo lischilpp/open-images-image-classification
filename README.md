@@ -23,7 +23,7 @@
 `sclearn` | `0.23.2` |
                 
 Other package versions may work too.  
-**Can be installed from requirements.txt**
+Can be installed from requirements.txt
 
  # Workflow
 1. Download the **Image IDs**, **Image labels**, **Boxes** and **Class Names** from https://storage.googleapis.com/openimages/web/download.html  
