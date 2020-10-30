@@ -38,13 +38,15 @@ class_ids = sorted(
 print('writing result to file')
 
 f = open(config.FILEPATH_CLASS_LIST_BY_IMAGE_COUNT, "w")
+writer = csv.writer(f)
 
 for class_id in class_ids:
     class_name = class_id_to_name[class_id]
+    # escape class names that include a comma
     if ',' in class_name:
         class_name = f'"{class_name}"'
     count = len(class_id_to_image_ids[class_id])
-    f.write(f'{class_name}, {count}\n')
+    writer.writerow([class_name, count])
 f.close()
 
 print('-------------- DONE --------------')

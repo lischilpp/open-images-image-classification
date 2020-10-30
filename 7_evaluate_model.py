@@ -67,27 +67,32 @@ for predicted, actual in zip(actual_indices, predicted_indices):
 
 # calculate percentages for all classes
 
+
 accuracies = []
 class_index = 0
 for class_counts in classification_counts:
     total_for_class = sum(class_counts)
 
-    # calculate accuracy for class
-    actual_score = class_counts[class_index]
-    accuracy = format_percentage2(actual_score / total_for_class)
-
-    # calculate top n guessed classes for actual class
+    accuracy = 0
     percentages = []
-    for j in range(5):
-        # pick class with highest classification count for the actual class
-        class_index_highest_count = np.argmax(class_counts)
-        highest_count = class_counts[class_index_highest_count]
-        if highest_count < 0:
-            break
-        percentage = format_percentage2(highest_count / total_for_class)
-        percentages.append({'class_index': class_index_highest_count,
-                            'percentage': percentage})
-        class_counts[class_index_highest_count] = -1
+
+    if total_for_class != 0:
+        # calculate accuracy for class
+
+        accuracy = class_counts[class_index] / total_for_class
+    
+        # calculate top n guessed classes for actual class
+        for j in range(5):
+            # pick class with highest classification count for the actual class
+            class_index_highest_count = np.argmax(class_counts)
+            highest_count = class_counts[class_index_highest_count]
+            if highest_count < 0:
+                break
+            acc = 0
+            percentage = format_percentage2(highest_count / total_for_class)
+            percentages.append({'class_index': class_index_highest_count,
+                                'percentage': percentage})
+            class_counts[class_index_highest_count] = -1
 
     # create string for top n guessed classes
     percentage_str = ''
@@ -101,7 +106,7 @@ for class_counts in classification_counts:
 
     accuracies.append({
         'class_name': class_names[class_index],
-        'accuracy': accuracy,
+        'accuracy': format_percentage2(accuracy),
         'percentages': percentage_str})
 
     class_index += 1

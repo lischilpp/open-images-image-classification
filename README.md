@@ -17,15 +17,17 @@
 | -------- | ----------- |
 `Pillow` | `7.0.0` |
 `numpy` | `1.18.5` |
+`requests` | `2.22.0` |
 `tensorflow` | `2.3.1` |
 `tensorflow-hub` | `0.9.0` |
-`scikit-learn` | `0.23.2` |
-
-Other package versions may work too
+`sclearn` | `0.23.2` |
+                
+Other package versions may work too.
+Can also be installed from requirements.txt
 
  # Workflow
 1. Download the **Image IDs**, **Image labels**, **Boxes** and **Class Names** from https://storage.googleapis.com/openimages/web/download.html  
- (Train, Validation and Test)
+ (Train, Validation and Test of "Subset with Image-Level Labels" and Bounding Boxes of **Subset with Bounding Boxes**)
  
 2. Put them in a folder structure like this:  
 	![inputFolder.png](screenshots/input_folder.png)
