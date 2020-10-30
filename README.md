@@ -4,11 +4,11 @@
 
 # Features
 
- - create a list of all classes by image count
- - download images for custom lists of classes (using parallelization)
- - delete corrupt images
- - train a model of choice on the downloaded image dataset
- - evaluate the performance of the model (includes per-class accuracies)
+ - Create a list of all classes by image count
+ - Download images for custom lists of classes (using parallelization)
+ - Delete corrupt images
+ - Train a model of choice on the downloaded image dataset
+ - Evaluate the performance of the model (includes per-class accuracies)
  
  # Dependencies
  Python 3.6 or higher
