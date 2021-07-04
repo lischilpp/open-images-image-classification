@@ -16,7 +16,7 @@ print('reading class ids and names')
 id_files = config.DIRPATH_IDS.glob('*.csv')
 class_name_to_id = {}
 class_id_to_name = {}
-with open(config.FILEPATH_CLASS_NAMES) as f:
+with open(config.FILEPATH_CLASS_NAMES, encoding='utf-8') as f:
     next(f)
     reader = csv.reader(f, delimiter=',')
     for row in reader:
@@ -31,7 +31,7 @@ print('reading bounding boxes')
 box_for_image = {}
 boxes_files = config.DIRPATH_BOUNDING_BOXES.glob('*.csv')
 for filename in boxes_files:
-    with open(filename) as f:
+    with open(filename, encoding='utf-8') as f:
         next(f)
         reader = csv.reader(f, delimiter=',')
         for row in reader:
@@ -60,7 +60,7 @@ if config.DOWNLAD_IMAGES_HIGH_RESOLUTION:
 
 image_id_to_url = {}
 for filename in id_files:
-    with open(filename) as f:
+    with open(filename, encoding='utf-8') as f:
         reader = csv.reader(f, delimiter=',')
         next(f)
         for row in reader:
@@ -71,7 +71,7 @@ for filename in id_files:
 print('reading class id to image ids mapping')
 
 class_id_to_image_ids = {}
-with open(config.FILEPATH_CLASS_ID_TO_IMAGE_IDS) as f:
+with open(config.FILEPATH_CLASS_ID_TO_IMAGE_IDS, encoding='utf-8') as f:
     for line in f:
         line_arr = line.rstrip().split(',')
         class_id = line_arr[0]
@@ -138,7 +138,7 @@ def download_images_for_class_list(filename):
         category_path.mkdir()
 
     lines = []
-    with open(filename) as f:
+    with open(filename, encoding='utf-8') as f:
         lines = [line.rstrip() for line in f]
 
     for i in range(len(lines)):

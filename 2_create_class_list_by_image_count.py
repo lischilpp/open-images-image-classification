@@ -6,7 +6,7 @@ print('reading class ids')
 
 class_ids = []
 class_id_to_name = {}
-with open(config.FILEPATH_CLASS_NAMES) as f:
+with open(config.FILEPATH_CLASS_NAMES, encoding='utf-8') as f:
     next(f)
     reader = csv.reader(f, delimiter=',')
     for row in reader:
@@ -18,7 +18,7 @@ with open(config.FILEPATH_CLASS_NAMES) as f:
 print('reading class id to image ids mapping')
 
 class_id_to_image_ids = {}
-with open(config.FILEPATH_CLASS_ID_TO_IMAGE_IDS) as f:
+with open(config.FILEPATH_CLASS_ID_TO_IMAGE_IDS, encoding='utf-8') as f:
     for line in f:
         line_arr = line.rstrip().split(',')
         class_id = line_arr[0]
@@ -37,7 +37,10 @@ class_ids = sorted(
 
 print('writing result to file')
 
-f = open(config.FILEPATH_CLASS_LIST_BY_IMAGE_COUNT, "w")
+if not config.DIRPATH_OUT.exists():
+    config.DIRPATH_OUT.mkdir()
+
+f = open(config.FILEPATH_CLASS_LIST_BY_IMAGE_COUNT, "w", encoding='utf-8', newline='')
 writer = csv.writer(f)
 
 for class_id in class_ids:

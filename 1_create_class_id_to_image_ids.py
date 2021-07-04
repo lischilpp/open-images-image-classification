@@ -5,7 +5,7 @@ from pathlib import Path
 print('reading class ids')
 
 class_ids = []
-with open(config.FILEPATH_CLASS_NAMES) as f:
+with open(config.FILEPATH_CLASS_NAMES, encoding='utf-8') as f:
     next(f)
     reader = csv.reader(f, delimiter=',')
     for row in reader:
@@ -21,7 +21,7 @@ for class_id in class_ids:
 
 label_files = config.DIRPATH_LABELS.glob('*.csv')
 for filename in label_files:
-    with open(filename) as f:
+    with open(filename, encoding='utf-8') as f:
         next(f)
         reader = csv.reader(f, delimiter=',')
         for row in reader:
@@ -34,7 +34,10 @@ for filename in label_files:
 
 print('writing result to file')
 
-f = open(config.FILEPATH_CLASS_ID_TO_IMAGE_IDS, "w")
+if not config.DIRPATH_PROCESSING.exists():
+    config.DIRPATH_PROCESSING.mkdir()
+
+f = open(config.FILEPATH_CLASS_ID_TO_IMAGE_IDS, "w", encoding='utf-8')
 for class_id in class_ids:
     image_ids = class_id_to_image_ids[class_id]
     image_ids_str = ';'.join(image_ids)

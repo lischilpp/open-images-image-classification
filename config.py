@@ -31,12 +31,17 @@ DIRPATH_DATASET = DIRPATH_IMAGE_DOWNLOAD / 'animals'
 
 # other paths
 
-DIRPATH_IDS = Path('in/ids')
-DIRPATH_LABELS = Path('in/labels')
-DIRPATH_BOUNDING_BOXES = Path('in/boxes')
-DIRPATH_CLASS_LISTS_TO_DOWNLOAD = Path('in/class_lists')
-FILEPATH_CLASS_NAMES = Path('in/oidv6-class-descriptions.csv')
-FILEPATH_CLASS_ID_TO_IMAGE_IDS = Path('processing/class_id_to_image_ids.csv')
-FILEPATH_CLASS_LIST_BY_IMAGE_COUNT = Path('out/class_list_by_image_count.csv')
-FILEPATH_SAVED_MODEL = Path('out/saved_model')
-FILEPATH_CLASS_ACCURACIES = Path('out/accuracies.csv')
+DIRPATH_IN = Path('in')
+DIRPATH_IDS = DIRPATH_IN / 'ids'
+DIRPATH_LABELS = DIRPATH_IN / 'labels'
+DIRPATH_BOUNDING_BOXES = DIRPATH_IN / 'boxes'
+DIRPATH_CLASS_LISTS_TO_DOWNLOAD = DIRPATH_IN / 'class_lists'
+FILEPATH_CLASS_NAMES = DIRPATH_IN / 'oidv6-class-descriptions.csv'
+
+DIRPATH_PROCESSING = Path('processing')
+FILEPATH_CLASS_ID_TO_IMAGE_IDS = DIRPATH_PROCESSING / 'class_id_to_image_ids.csv'
+
+DIRPATH_OUT = Path('out')
+FILEPATH_CLASS_LIST_BY_IMAGE_COUNT = DIRPATH_OUT / 'class_list_by_image_count.csv'
+FILEPATH_SAVED_MODEL = DIRPATH_OUT / 'saved_model'
+FILEPATH_CLASS_ACCURACIES = DIRPATH_OUT / 'accuracies.csv'

@@ -124,7 +124,7 @@ accuracies = sorted(
 
 print(f'accuracy: {format_percentage2(correct_predictions / total_predictions)}%')
 
-f = open(config.FILEPATH_CLASS_ACCURACIES, "w")
+f = open(config.FILEPATH_CLASS_ACCURACIES, "w", encoding='utf-8')
 
 for entry in accuracies:
     f.write(f'{entry["accuracy"]}%,{entry["class_name"]},"{entry["percentages"]}"\n')
