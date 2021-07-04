@@ -19,7 +19,7 @@
 `requests` | `2.22.0` |
 `tensorflow` | `2.3.1` |
 `tensorflow-hub` | `0.9.0` |
-`sclearn` | `0.23.2` |
+`sklearn` | `0.23.2` |
                 
 Other package versions may work too.  
 Can be installed from requirements.txt
