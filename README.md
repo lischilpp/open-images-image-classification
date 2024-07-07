@@ -1,4 +1,4 @@
-# OID-ImageClassification
+# OpenImages Scripts
 ### A collection of scripts to download data, train and evaluate an image classifier on Open Images using TensorFlow
 
 # Features
