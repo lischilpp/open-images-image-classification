@@ -5,7 +5,6 @@
     <img src="https://img.shields.io/badge/TensorFlow-FF6F00?logo=tensorflow&logoColor=white">
   </p>
   <p>A collection of scripts to download data, train and evaluate <br>an image classifier on Open Images using TensorFlow</p>
-  <p><a href="https://lischilpp.github.io/unity-voxel-engine-demo/" target="_blank">Live Demo</a></p>
 </div>
 
 <details>
