@@ -7,16 +7,12 @@
   <p>A collection of scripts to download data, train and evaluate <br>an image classifier on Open Images using TensorFlow</p>
 </div>
 
-<details>
-  <summary>Table of Contents</summary>
-  <ul>
-    <li><a href="#features">Features</a></li>
-    <li><a href="#dependencies">Dependencies</a></li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#recommendations">Recommendations</a></li>
-    <li><a href="#license">License</a></li>
-  </ul>
-</details>
+## Table of Contents
+- [Features](#features)
+- [Dependencies](#dependencies)
+- [Usage](#usage)
+- [Recommendations](#recommendations)
+- [License](#license)
 
 ## Features
  - Create a list of all classes by image count
